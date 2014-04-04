@@ -13,11 +13,11 @@
 	See the License for the specific language governing permissions and
 	limitations under the License.
 */
-//var ProximityUUID = "e2c56db5-dffb-48d2-b060-d0f5a71096e0";
-var ProximityUUID = "00000000-0000-0000-0000-000000000000";
+var ProximityUUID = "e2c56db5-dffb-48d2-b060-d0f5a71096e0";
+//var ProximityUUID = "00000000-0000-0000-0000-000000000000";
 
 var app = {
-	var webView = null,
+	webView : null,
 	
     initialize: function() {
         this.bindEvents();
@@ -45,12 +45,14 @@ var app = {
 	
 	visitWebPage : function(ibeacon){
 		if(ibeacon.proximityUUID == ProximityUUID){
-			//alert(ibeacon.proximity);
-			if(ibeacon.proximity >= 2 && webView !== null){
+			if(ibeacon.proximity >= 2 && app.webView !== null){
+			//alert("stop");
 				app.webView.close();
 				app.webView = null;
-			}else if(ibeacon.proximity == 1 && webView == null){
-				app.webView = window.open('http://www.baidu.com', '_blank', 'location=no');
+			}else if(ibeacon.proximity == 1 && app.webView == null){
+			//alert("show!!");
+				app.webView = window.open('http://www.bcsphere.net/portal.php?mod=topic&topicid=2', '_blank', 'location=no');
+				//app.webView = window.open('http://www.bcsphere.org/bcsphere-core-android', '_blank', 'location=no');
 				//webView = window.open('http://www.bcsphere.org/bcmeeting.html', '_blank', 'location=no');
 			}
 		}
