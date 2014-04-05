@@ -45,7 +45,7 @@ var app = {
 	},
 	
 	visitWebPage : function(ibeacon){
-		if(ibeacon.proximityUUID == ProximityUUID){
+		if(ibeacon.proximityUUID.toLowerCase() == ProximityUUID){
 			if(ibeacon.proximity == 1 && !app.webView.isOpened){
 				app.webView = window.open('http://www.bcsphere.net/portal.php?mod=topic&topicid=2', '_blank', 'location=yes');
 				app.webView.isOpened = true;
