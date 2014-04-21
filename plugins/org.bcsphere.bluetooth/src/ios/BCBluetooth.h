@@ -26,6 +26,7 @@
 #import <CoreLocation/CoreLocation.h>
 @interface BCBluetooth : CDVPlugin <CBCentralManagerDelegate, CBPeripheralDelegate,CBPeripheralManagerDelegate,CLLocationManagerDelegate>
 {
+    NSTimer *stopScanTimer;
     NSInteger serviceNum;
     NSInteger characteristicNum;
     NSInteger stateChangeCount;
@@ -34,6 +35,7 @@
     BOOL isConnectedByManager;
     BOOL isVariableInit;
     BOOL isRead;
+    BOOL isFindingPeripheral;
 }
 
 @property (retain, nonatomic) CBPeripheralManager *myPeripheralManager;
@@ -59,10 +61,6 @@
 
 @property (strong, nonatomic) NSString *bluetoothState;
 
-@property (nonatomic, strong) CLLocationManager *locationManager;
-@property (nonatomic, strong) CLBeaconRegion *beaconRegion;
-@property NSMutableDictionary *rangedRegions;
-
 - (void)getEnvironment:(CDVInvokedUrlCommand *)command;
 - (void)getBluetoothState:(CDVInvokedUrlCommand*)command;
 - (void)openBluetooth:(CDVInvokedUrlCommand*)command;
@@ -87,6 +85,4 @@
 - (void)addServices:(CDVInvokedUrlCommand*)command;
 - (void)removeServices:(CDVInvokedUrlCommand*)command;
 
-- (void)startIBeaconScan:(CDVInvokedUrlCommand *)command;
-- (void)stopIBeaconScan:(CDVInvokedUrlCommand *)command;
 @end

@@ -26,22 +26,24 @@ var app = {
 
     bindEvents: function() {
         document.addEventListener('bcready', this.onBCReady, false);
-        document.addEventListener('newibeacon', this.onNewIBeacon, false);
-		document.addEventListener('ibeaconproximityupdate', this.onIBeaconProximityChange,false);
+    },
+    
+    onBCReady: function() {
+    	BC.IBeaconManager.StartIBeaconScan(ProximityUUID);
+    	BC.iBeaconManager.addEventListener("newibeacon",app.onNewIBeacon);
     },
 
-	onIBeaconProximityChange : function(arg){
-		var ibeacon = BC.bluetooth.ibeacons[arg.iBeaconID];
-		app.visitWebPage(ibeacon);
+	onIBeaconProximityUpdate : function(theibeacon){
+		//alert(theibeacon.proximityUUID);
+		app.visitWebPage(theibeacon);
 	},
 	
-    onBCReady: function() {
-        BC.Bluetooth.StartIBeaconScan(ProximityUUID);
-    },
-	
-	onNewIBeacon : function(arg){
-		var ibeacon = BC.bluetooth.ibeacons[arg.iBeaconID];
-		app.visitWebPage(ibeacon);
+	onNewIBeacon : function(s){
+		var newibeacon = s.target;
+		newibeacon.addEventListener("ibeaconproximityupdate",app.onIBeaconProximityUpdate);
+		//if you want get the accurate distance you can listen the "ibeaconaccuracyupdate" event.
+		//newibeacon.addEventListener("ibeaconaccuracyupdate",app.onIBeaconAccuracyUpdate);
+		app.visitWebPage(newibeacon);
 	},
 	
 	visitWebPage : function(ibeacon){
