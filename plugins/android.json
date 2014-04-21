@@ -24,12 +24,13 @@
         "org.apache.cordova.inappbrowser": {
             "PACKAGE_NAME": "org.bcsphere.bcibeacon"
         },
-        "org.bcsphere.bluetooth": {
-            "PACKAGE_NAME": "org.bcsphere.bcibeacon"
-        },
         "org.bcsphere.ibeacon": {
             "PACKAGE_NAME": "org.bcsphere.bcibeacon"
         }
     },
-    "dependent_plugins": {}
+    "dependent_plugins": {
+        "org.bcsphere.bluetooth": {
+            "PACKAGE_NAME": "org.bcsphere.bcibeacon"
+        }
+    }
 }
